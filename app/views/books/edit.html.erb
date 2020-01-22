@@ -1,0 +1,29 @@
+<div class="col-md-6 col-md-offset-3">
+
+<h1>Editing Book</h1>
+
+<%= form_for(@book) do |f| %>
+
+  <%= render '/devise/shared/error_message', temp: f.object %>
+
+  <div class="field row">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, class: "col-xs-12" %>
+  </div>
+
+  <div class="field row">
+    <%= f.label :body, "Opinion"%>
+    <%= f.text_area :body, class: "col-xs-12" %>
+  </div>
+
+  <div class="action row">
+    <%= f.submit 'Update Book', class: "btn btn-primary col-xs-12" %>
+  </div>
+
+<% end %>
+
+<%= link_to "Show", book_path(@book) %>
+ | 
+<%= link_to "Back", books_path %>
+
+</div>

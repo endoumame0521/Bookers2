@@ -1,0 +1,26 @@
+<h2>User info</h2>
+
+<%= form_for(@user) do |f| %>
+
+  <%= render '/devise/shared/error_message', temp: f.object %>
+
+  <div class="field">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile_image, "Image" %>
+    <%= f.attachment_field :profile_image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, "Introduction" %>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div class="action">
+    <%= f.submit 'Update User' %>
+  </div>
+
+<% end %>
