@@ -1,0 +1,20 @@
+<div class="col-md-6 col-md-offset-3">
+
+<h1>Editing Comment</h1>
+
+<%= form_for [@book, @comment] do |f| %>
+
+  <%= render '/devise/shared/error_message', temp: f.object %>
+
+  <div class="field row">
+    <%= f.label :comment, "Comment" %>
+    <%= f.text_area :comment, class: "col-xs-12" %>
+  </div>
+
+  <div class="action row">
+    <%= f.submit 'Update Comment', class: "btn btn-primary col-xs-12" %>
+  </div>
+
+<% end %>
+
+</div>
