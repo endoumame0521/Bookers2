@@ -26,28 +26,34 @@
     </tbody>
   </table>
 
-  <h4><%= @book.favorites.count %> Favorites</h4>
-
   <% if @book.favorited_by?(current_user) %>
-    <li>
+    <h4>
       <%= link_to book_favorites_path(@book), method: :delete do %>
+        <%= @book.favorites.count %> Favorites
         <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-        <%= @book.favorites.count %> favorites
       <% end %>
-    </li>
+    </h4>
   <% else %>
-    <li>
+    <h4>
       <%= link_to book_favorites_path(@book), method: :post do %>
+        <%= @book.favorites.count %> Favorites
         <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <%= @book.favorites.count %> favorites
       <% end %>
-    </li>
+    </h4>
   <% end %>
+
 
   <table class="table">
     <tbody>
-      <tr></tr>
+      <% @favorites.each do |favorite| %>
+        <td>
+          <%= attachment_image_tag User.find(favorite.user_id), :profile_image, :fill, 20, 20,　format: 'jpeg', fallback: "no_image.jpg", size: 20 %><br>
+          <%= favorite.user.name %>
+        </td>
+      <% end %>
     </tbody>
+  </table>
+
 
   <h4><%= @comments.count %> Comments</h4>
 
@@ -56,7 +62,7 @@
       <% @comments.each do |comment| %>
         <tr>
           <td>
-            <%= attachment_image_tag User.find(comment.user_id), :profile_image, :fill, 20, 20,　format: 'jpeg', fallback: " no_image.jpg", size: 20 %><br>
+            <%= attachment_image_tag User.find(comment.user_id), :profile_image, :fill, 20, 20,　format: 'jpeg', fallback: "no_image.jpg", size: 20 %><br>
             <%= comment.user.name %>
           </td>
           <td><%= comment.comment %></td>
@@ -71,14 +77,15 @@
       <% end %>
   	</tbody>
   </table>
+
+  <h4>New comment</h4>
   <div class="container">
-    <h3>New comment</h3>
     <%= form_for [@book, @comment] do |f| %>
       <div class="field row">
-        <%= f.text_area :comment, placeholder: "input a comment", class: "col-xs-4" %>
+        <%= f.text_area :comment, placeholder: "input a comment", class: "col-xs-3" %>
       </div>
       <div class="action row">
-        <%= f.submit "Create Comment", class: "col-xs-4" %>
+        <%= f.submit "Create Comment", class: "btn btn-primary col-xs-3" %>
       </div>
     <% end %>
   </div>

@@ -22,6 +22,11 @@
   box-sizing: border-box;
 }
 
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: #333333;
+}
+
 header {
   margin-bottom: 70px;
 }

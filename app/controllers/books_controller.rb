@@ -24,6 +24,7 @@ class BooksController < ApplicationController
     @user = User.find(@book.user_id)
     @comments = @book.comments
     @comment = Comment.new
+    @favorites = @book.favorites
   end
 
   def edit

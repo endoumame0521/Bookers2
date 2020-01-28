@@ -13,7 +13,6 @@
   	  	<th></th>
   	  	<th>Title</th>
   	  	<th>Opinion</th>
-  	  	<th>User:ID</th>
   	  	<th colspan="3"></th>
   	  </tr>
   	</thead>
@@ -28,10 +27,56 @@
           </td>
           <td><%= link_to book.title, book_path(book.id)%></td>
           <td><%= book.body %></td>
-          <td><%= book.user_id %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
+  <table class="table">
+    <thead>
+      <tr>
+        <th><h4>Following</h4></th>
+        <th>name</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.following.each do |user| %>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 40 %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user_path(user) %></td>
+          <td><%= render partial: 'users/follow_form', locals: { user: user } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><h4>Followers</h4></th>
+        <th>Name</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.followers.each do |user| %>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 40 %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user_path(user) %></td>
+          <td><%= render partial: 'users/follow_form', locals: { user: user } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
 </div>
+
+
+
