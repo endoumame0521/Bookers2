@@ -26,6 +26,18 @@
     </tbody>
   </table>
 
+  <h4><%= @book.tags.count %> Tags</h4>
+
+  <table class="table">
+    <tbody>
+      <% @book.tags.each do |book| %>
+        <td>
+          <%= book.name %>
+        </td>
+      <% end %>
+    </tbody>
+  </table>
+
   <% if @book.favorited_by?(current_user) %>
     <h4>
       <%= link_to book_favorites_path(@book), method: :delete do %>

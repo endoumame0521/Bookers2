@@ -1,20 +1,33 @@
 <h2>New book</h2>
 
+<% temp = Book.new %>
+<% temp.tags.build %>
 
-<%= form_for(Book.new) do |f| %>
+<%= form_for(temp) do |form| %>
 
   <div class="field row">
-  	<%= f.label :title, "Title" %>
-  	<%= f.text_field :title, class: "col-xs-12" %>
+  	<%= form.label :title, "Title" %>
+  	<%= form.text_field :title, class: "col-xs-12" %>
   </div>
 
   <div class="field row">
-  	<%= f.label :body, "Opinion" %>
-  	<%= f.text_area :body, class: "col-xs-12" %>
+  	<%= form.label :body, "Opinion" %>
+  	<%= form.text_area :body, class: "col-xs-12" %>
   </div>
 
+  <div class="tags">
+    <%= form.fields_for :tags do |f| %>
+      <%= f.label :name, "Tags" %>
+      <%= render "tag_fields", f: f %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "Add tags", form, :tags, class: "btn" %>
+    </div>
+  </div>
+
+  <br>
   <div class="action row">
-    <%= f.submit "Create Book", class: "btn btn-primary col-xs-12" %>
+    <%= form.submit "Create Book", class: "btn btn-primary col-xs-12" %>
   </div>
 
 <% end %>

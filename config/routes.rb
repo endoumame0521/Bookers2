@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   resources :books do
   	resources :comments, only: [:create, :edit, :update, :destroy]
   	resource :favorites, only: [:create, :destroy]
+
   end
 
-  resources :users
+  resources :users do
+    get :search, on: :collection
+  end
+
+
   resources :relationships, only: [:create, :destroy]
 
   root 'home#top'

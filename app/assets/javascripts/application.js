@@ -13,8 +13,10 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
+//= require cocoon
 //= require bootstrap-sprockets
 //= require_tree .
+
 
 $(document).ready(function(){
   $("#theTarget").skippr({
