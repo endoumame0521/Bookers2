@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap-sprockets";
+
  @import "bootstrap";
 
 * {
@@ -28,11 +28,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 header {
-  margin-bottom: 70px;
-}
-
-.body {
-  padding-top: 50px;
+  margin-bottom: 20px;
 }
 
 #notice {
@@ -49,35 +45,4 @@ header {
 
 .btn-secondary {
   background-color: gray;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.image1 {
-background-image: url(image1.jpg);
-}
-.image2 {
-background-image: url(image2.jpg);
-}
-.image3 {
-background-image: url(image3.jpg);
-}
-.image4 {
-background-image: url(image4.jpg);
-}
-.image5 {
-background-image: url(image5.jpg);
-}
-
-#container{
-  height: 500px;
 }

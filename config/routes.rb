@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
   end
 
-  resources :users do
-    get :search, on: :collection
-  end
+  resources :users
+
+  get 'searches', to: 'searches#index'
 
 
   resources :relationships, only: [:create, :destroy]

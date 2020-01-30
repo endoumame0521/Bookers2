@@ -13,33 +13,42 @@
 
   <body>
 
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header class="navbar navbar-fixed-top navbar-dark bg-dark">
       <div class="container">
-        <nav class="nav navbar-nav navbar-left">
-          <span>Bookers</span>
+        <nav class="navbar-brand">
+          <span>Bookers2</span>
         </nav>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
+        <nav class="navbar-nav">
+          <ul class="nav justify-content-end">
             <% if user_signed_in? %>
-              <li><%= link_to ' Home', user_path(current_user.id), class: "glyphicon glyphicon-home" %></li>
-              <li><%= link_to ' Users', users_path, class: "glyphicon glyphicon-user" %></li>
-              <li><%= link_to ' Books', books_path, class: "glyphicon glyphicon-book" %></li>
-              <li><%= link_to ' logout', destroy_user_session_path, class: "glyphicon glyphicon-log-out", method: :delete %></li>
+              <div class="search-form">
+              <%= form_tag(searches_path , method: :get) do %>
+                <%= select @search_content, :search_target, [["Users","Users"], ["Books","Books"]] %>
+                <%= text_field(@search_content, :search_word)%>
+                <%= select @search_content, :search_method, [["forward_match","forward_match"], ["backward_match","backward_match"], ["perfect_match","perfect_match"], ["partial_match","partial_match"]] %>
+                <%= submit_tag "Search" %>
+              <% end %>
+              </div>
+              <li class="mx-3"><%= link_to ' Home', user_path(current_user.id), class: "nav-link fas fa-home" %></li>
+              <li class="mx-3"><%= link_to ' Users', users_path, class: "nav-link fas fa-user" %></li>
+              <li class="mx-3"><%= link_to ' Books', books_path, class: "nav-link fas fa-book" %></li>
+              <li class="mx-3"><%= link_to ' logout', destroy_user_session_path, class: "nav-link fas fa-sign-out-alt", method: :delete %></li>
             <% else %>
-              <li><%= link_to ' Home', root_path, class: "glyphicon glyphicon-home home" %></li>
-              <li><%= link_to ' About', home_about_path, class: "glyphicon glyphicon-link" %></li>
-              <li><%= link_to ' sign up', new_user_registration_path, class: "glyphicon glyphicon-edit" %></li>
-              <li><%= link_to ' login', new_user_session_path, class: "glyphicon glyphicon-log-in" %></li>
+              <li class="mx-3"><%= link_to ' Home', root_path, class: "nav-link fas fa-home" %></li>
+              <li class="mx-3"><%= link_to ' About', home_about_path, class: "nav-link fas fa-link" %></li>
+              <li class="mx-3"><%= link_to ' sign up', new_user_registration_path, class: "nav-link fas fa-edit" %></li>
+              <li class="mx-3"><%= link_to ' login', new_user_session_path, class: "nav-link fas fa-sign-in-alt" %></li>
             <% end %>
           </ul>
         </nav>
+        </div>
       </div>
     </header>
 
     <div class="body">
       <div class="container">
         <div class="row">
-          <p id="notice"><%= notice %><%= alert %></p>
+          <p class="col-12" id="notice"><%= notice %><%= alert %></p>
           <%= yield %>
         </div>
       </div>
@@ -48,7 +57,7 @@
     <footer>
       <div class="container">
         <div class="row">
-          <div class="col-xs-3 col-xs-offset-9">
+          <div class="col-3 offset-9">
             <p>CopyRight Infratop.inc</p>
           </div>
         </div>
@@ -57,10 +66,6 @@
 
   </body>
 </html>
-
-
-
-
 
 
 

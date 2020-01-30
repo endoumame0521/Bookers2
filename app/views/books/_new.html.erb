@@ -1,4 +1,4 @@
-<h2>New book</h2>
+<h2 class="pt-4">New book</h2>
 
 <% temp = Book.new %>
 <% temp.tags.build %>
@@ -7,27 +7,26 @@
 
   <div class="field row">
   	<%= form.label :title, "Title" %>
-  	<%= form.text_field :title, class: "col-xs-12" %>
+  	<%= form.text_field :title, class: "col-12" %>
   </div>
 
   <div class="field row">
   	<%= form.label :body, "Opinion" %>
-  	<%= form.text_area :body, class: "col-xs-12" %>
+  	<%= form.text_area :body, class: "col-12" %>
   </div>
 
-  <div class="tags">
+  <div class="tags row">
     <%= form.fields_for :tags do |f| %>
       <%= f.label :name, "Tags" %>
-      <%= render "tag_fields", f: f %>
+      <%= render "books/tag_fields", f: f %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association "Add tags", form, :tags, class: "btn" %>
+      <%= link_to_add_association "Add tags", form, :tags, partial: "books/tag_fields", class: "btn btn-light btn-sm mt-2" %>
     </div>
   </div>
 
-  <br>
-  <div class="action row">
-    <%= form.submit "Create Book", class: "btn btn-primary col-xs-12" %>
+  <div class="action row pt-4">
+    <%= form.submit "Create Book", class: "btn btn-info col-12" %>
   </div>
 
 <% end %>

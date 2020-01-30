@@ -1,0 +1,75 @@
+<% if @target == "Users" %>
+
+  <h2>Users</h2>
+
+  <table class="table">
+  	<thead>
+  	  <tr>
+  	  	<th>Image</th>
+  	  	<th>name</th>
+  	  	<th>User:ID</th>
+  	  	<th colspan="2"></th>
+  	  </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+      	<% @result.each do |result| %>
+        <td><%= attachment_image_tag result, :profile_image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 40 %></td>
+        <td><%= result.name %></td>
+        <td><%= result.id %></td>
+        <td><%= link_to "Show", user_path(result.id) %></td>
+        <td><%= render partial: 'users/follow_form', locals: { user: result } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% elsif @target == "Books" %>
+
+<h2>Books</h2>
+
+  <table class="table table-hover table-inverse">
+  	<thead>
+  	  <tr>
+  	  	<th></th>
+  	  	<th>Title</th>
+  	  	<th>Opinion</th>
+  	  	<th>Favorites</th>
+  	  	<th colspan="3"></th>
+  	  </tr>
+  	</thead>
+
+  	<tbody>
+      <% @result.each do |result| %>
+        <tr>
+          <td>
+          	<% user = User.find(result.user_id) %>
+          	<%= link_to user_path(user.id) do %>
+          	  <%= attachment_image_tag user, :profile_image, :fill, 50, 50,　format: 'jpeg', fallback: "no_image.jpg", size: 40 %>
+            <% end %>
+          </td>
+          <td><%= link_to result.title, book_path(result.id)%></td>
+          <td><%= result.body %></td>
+          <td>
+            <% if result.favorited_by?(current_user) %>
+              <p>
+                <%= link_to book_favorites_path(result), method: :delete do %>
+                  <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                  <span>×</span><%= result.favorites.count %>
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to book_favorites_path(result), method: :post do %>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                  <span>×</span><%= result.favorites.count %>
+                <% end %>
+              </p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

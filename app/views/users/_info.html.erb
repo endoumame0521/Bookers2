@@ -2,31 +2,34 @@
 
 <h2>User info</h2>
 
+<div class="row">
+<div class="col-6">
 <%= attachment_image_tag @user, :profile_image, :fill, 100, 100,　format: 'jpeg', fallback: "no_image.jpg", size: 100, class: "info_image" %>
+</div>
+<div class="col-6 py-4">
+<%= render partial: 'users/follow_form', locals: { user: @user } %>
+</div>
+</div>
 
 <table class="table">
   <tbody>
     <tr>
       <th>name</th>
-      <th><%= @user.name %></th>
+      <td><%= @user.name %></td>
     </tr>
     <tr>
       <th>introduction</th>
-      <th><%= @user.introduction %></th>
+      <td><%= @user.introduction %></td>
     </tr>
-  </tbody>
-</table>
-
-<table class="table">
-  <tbody>
     <tr>
-      <th><%= render partial: 'users/follow_form', locals: { user: @user } %></th>
-      <th><%= render 'users/stats' %></th>
+      <td><strong><%= @user.following.count %></strong> following</td>
+      <td><strong><%= @user.followers.count %></strong> followers</td>
     </tr>
   </tbody>
 </table>
-
 
 <div class="row">
-  <%= link_to "", edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  <diV class="col-12 btn btn-light">
+    <%= link_to "", edit_user_path(current_user.id), class: "fas fa-user-cog" %>
+  </diV>
 </div>
