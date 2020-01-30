@@ -12,11 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  resources :relationships, only: [:create, :destroy]
 
   get 'searches', to: 'searches#index'
-
-
-  resources :relationships, only: [:create, :destroy]
 
   root 'home#top'
 

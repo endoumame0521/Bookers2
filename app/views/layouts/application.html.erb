@@ -23,7 +23,7 @@
             <% if user_signed_in? %>
               <div class="search-form">
               <%= form_tag(searches_path , method: :get) do %>
-                <%= text_field(@search_content, :search_word)%>
+                <%= text_field @search_content, :search_word, placeholder: "Search" %>
                 <%= select @search_content, :search_target, [["Users","Users"], ["Books","Books"]] %>
                 <%= select @search_content, :search_method, [["forward_match","forward_match"], ["backward_match","backward_match"], ["perfect_match","perfect_match"], ["partial_match","partial_match"]] %>
                 <%= submit_tag "Search" %>

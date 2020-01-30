@@ -10,9 +10,11 @@ class SearchesController < ApplicationController
       elsif method == "backward_match"
               @result = model.where("name LIKE? OR introduction LIKE?", "%#{word}", "%#{word}")
       elsif method == "perfect_match"
-              @result = model.where("#{word}")
+              @result = model.where(name: "#{word}")
       elsif method == "partial_match"
               @result = model.where("name LIKE? OR introduction LIKE?", "%#{word}%", "%#{word}%")
+      else
+        redirect_to searches_path
       end
 
     elsif target == "Books"
@@ -24,9 +26,11 @@ class SearchesController < ApplicationController
       elsif method == "backward_match"
               @result = model.where("title LIKE? OR body LIKE?", "%#{word}", "%#{word}")
       elsif method == "perfect_match"
-              @result = model.where("#{word}")
+              @result = model.where(title: "#{word}")
       elsif method == "partial_match"
               @result = model.where("title LIKE? OR body LIKE?", "%#{word}%", "%#{word}%")
+      else
+        redirect_to searches_path
       end
 
     end

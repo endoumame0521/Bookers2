@@ -2,22 +2,33 @@
 
 <h1>Editing Book</h1>
 
-<%= form_for(@book) do |f| %>
 
-  <%= render '/devise/shared/error_message', temp: f.object %>
+<%= form_for(@book) do |form| %>
+
+  <%= render '/devise/shared/error_message', temp: form.object %>
 
   <div class="field row">
-    <%= f.label :title, "Title" %>
-    <%= f.text_field :title, class: "col-12" %>
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, class: "col-12" %>
   </div>
 
   <div class="field row">
-    <%= f.label :body, "Opinion"%>
-    <%= f.text_area :body, class: "col-12" %>
+    <%= form.label :body, "Opinion"%>
+    <%= form.text_area :body, class: "col-12" %>
   </div>
 
-  <div class="action row">
-    <%= f.submit 'Update Book', class: "btn btn-primary col-12" %>
+  <div class="tags">
+    <%= form.fields_for :tags do |f| %>
+      <%= f.label :name, "Tags" %>
+      <%= render "books/tag_fields", f: f %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "Add tags", form, :tags, partial: "books/tag_fields", class: "btn btn-light btn-sm mt-2" %>
+    </div>
+  </div>
+
+  <div class="action row pt-4">
+    <%= form.submit 'Update Book', class: "btn btn-primary col-12" %>
   </div>
 
 <% end %>

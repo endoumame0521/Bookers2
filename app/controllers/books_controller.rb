@@ -30,6 +30,11 @@ class BooksController < ApplicationController
   def edit
     @book = Book.find(params[:id])
     @user = User.find(@book.user_id)
+
+    if @book.tags.empty?
+      @book.tags.build
+    end
+
     unless @user.id == current_user.id
       redirect_to books_path
     end
@@ -54,6 +59,6 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :body, tags_attributes: [:id, :name, :destroy])
+      params.require(:book).permit(:title, :body, tags_attributes: [:id, :name, :_destroy])
     end
 end
